@@ -12,8 +12,8 @@ public class Douban {
     private String actors;
     private String cover;
     private String directors;
-    private double douban_score;
-    private int douban_votes;
+    private double score;
+    private int votes;
     private String genres;
     private String IMDB_id;
     private String languages;
@@ -73,20 +73,20 @@ public class Douban {
         this.directors = directors;
     }
 
-    public double getDouban_score() {
-        return douban_score;
+    public double getScore() {
+        return score;
     }
 
-    public void setDouban_score(double douban_score) {
-        this.douban_score = douban_score;
+    public void setScore(double score) {
+        this.score = score;
     }
 
-    public int getDouban_votes() {
-        return douban_votes;
+    public int getVotes() {
+        return votes;
     }
 
-    public void setDouban_votes(int douban_votes) {
-        this.douban_votes = douban_votes;
+    public void setVotes(int votes) {
+        this.votes = votes;
     }
 
     public String getGenres() {

@@ -1,6 +1,7 @@
 package henu.yan.sample.repository;
 
 import henu.yan.sample.model.Wallpaper;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RestResource;
@@ -18,7 +19,7 @@ public interface WallpaperRepository extends PagingAndSortingRepository<Wallpape
      * @return 返回该ID的壁纸列表
      */
     @RestResource(path = "imgKey", rel = "imgKey")
-    List<Wallpaper> findByImgKeyEqualsOrderByViewsDesc(String imgKey, Pageable p);
+    List<Wallpaper> findAllByImgKeyEqualsOrderByViewsDesc(String imgKey, Pageable p);
 
     /**
      * 获取不同纯度的壁纸，并按浏览次数由高到低排序
@@ -27,7 +28,7 @@ public interface WallpaperRepository extends PagingAndSortingRepository<Wallpape
      * @return 返回该纯度的壁纸列表
      */
     @RestResource(path = "purity", rel = "purity")
-    List<Wallpaper> findByPurityEqualsOrderByViewsDesc(String purity, Pageable p);
+    List<Wallpaper> findAllByPurityEqualsOrderByViewsDesc(String purity, Pageable p);
 
     /**
      * 获取不同种类的壁纸，并按浏览次数由高到低排序
@@ -36,17 +37,17 @@ public interface WallpaperRepository extends PagingAndSortingRepository<Wallpape
      * @return 返回该种类的壁纸列表
      */
     @RestResource(path = "category", rel = "category")
-    List<Wallpaper> findByCategoryEqualsOrderByViewsDesc(String category, Pageable p);
+    List<Wallpaper> findAllByCategoryEqualsOrderByViewsDesc(String category, Pageable p);
 
     /**
-     * 获取不同纯度和不同种类的壁纸，并按浏览次数由高到低排序
-     * @param purity 纯度类型
-     * @param category 壁纸种类
+     *  按壁纸纯度和壁纸种类获取壁纸，并按浏览次数由高到低排序
+     * @param purity 壁纸纯度，可多个
+     * @param category 壁纸种类，可多个
      * @param p 分页
-     * @return 返回不同纯度和不同种类的壁纸
+     * @return 返回该壁纸纯度和壁纸种类的壁纸
      */
     @RestResource(path = "type", rel = "type")
-    List<Wallpaper> findByPurityEqualsAndCategoryEqualsOrderByViewsDesc(String purity, String category, Pageable p);
+    Page<Wallpaper> findAllByPurityInAndCategoryInOrderByViewsDesc(List<String> purity, List<String>  category, Pageable p);
 
     /**
      * 获取用户上传的所有壁纸，并按浏览次数由高到低排序
@@ -55,7 +56,7 @@ public interface WallpaperRepository extends PagingAndSortingRepository<Wallpape
      * @return 返回该用户的所有壁纸
      */
     @RestResource(path = "uploader", rel = "uploader")
-    List<Wallpaper> findByUploaderEqualsOrderByViewsDesc(String uploader, Pageable p);
+    List<Wallpaper> findAllByUploaderEqualsOrderByViewsDesc(String uploader, Pageable p);
 
     /**
      *  获取不同分辨率的壁纸，并按浏览次数由高到低排序
@@ -64,7 +65,7 @@ public interface WallpaperRepository extends PagingAndSortingRepository<Wallpape
      * @return 返回该分辨率下的所有壁纸
      */
     @RestResource(path = "imgSize", rel = "imgSize")
-    List<Wallpaper> findByImgSizeEqualsOrderByViewsDesc(String imgSize, Pageable p);
+    List<Wallpaper> findAllByImgSizeEqualsOrderByViewsDesc(String imgSize, Pageable p);
 
     /**
      * 返回不同格式的壁纸，主要为JPG和PNG，并按浏览次数由高到低排序
@@ -73,7 +74,7 @@ public interface WallpaperRepository extends PagingAndSortingRepository<Wallpape
      * @return 返回该格式的所有壁纸
      */
     @RestResource(path = "imgType", rel = "imgType")
-    List<Wallpaper> findByImgTypeEqualsOrderByViewsDesc(String imgType, Pageable p);
+    List<Wallpaper> findAllByImgTypeEqualsOrderByViewsDesc(String imgType, Pageable p);
 
     /**
      * 模糊搜索符合tags的壁纸，并按浏览次数由高到低排序
@@ -82,7 +83,7 @@ public interface WallpaperRepository extends PagingAndSortingRepository<Wallpape
      * @return  含有tags关键字的壁纸
      */
     @RestResource(path = "tags", rel = "tags")
-    List<Wallpaper> findByTagsContainingOrderByViewsDesc(String tags, Pageable p);
+    List<Wallpaper> findAllByTagsContainingOrderByViewsDesc(String tags, Pageable p);
 
     /**
      * 获取不同颜色的壁纸，并按浏览次数由高到低排序
@@ -91,7 +92,7 @@ public interface WallpaperRepository extends PagingAndSortingRepository<Wallpape
      * @return 返回该颜色的所有壁纸
      */
     @RestResource(path = "colors", rel = "colors")
-    List<Wallpaper> findByColorsContainingOrderByViewsDesc(String colors, Pageable p);
+    List<Wallpaper> findAllByColorsContainingOrderByViewsDesc(String colors, Pageable p);
 
     /**
      * 按点亮次数由高到低排序壁纸
@@ -99,7 +100,7 @@ public interface WallpaperRepository extends PagingAndSortingRepository<Wallpape
      * @return 返回按点亮次数由高到低排列的壁纸
      */
     @RestResource(path = "starOrder", rel = "starOrder")
-    List<Wallpaper> findByOrderByStarDesc(Pageable p);
+    List<Wallpaper> findAllByOrderByStarDesc(Pageable p);
 
     /**
      * 按上传时间由高到低排序壁纸
@@ -107,7 +108,7 @@ public interface WallpaperRepository extends PagingAndSortingRepository<Wallpape
      * @return 返回按上传时间由高到低排列的壁纸
      */
     @RestResource(path = "timeOrder", rel = "timeOrder")
-    List<Wallpaper> findByOrderByUploadTimeDesc(Pageable p);
+    List<Wallpaper> findAllByOrderByUploadTimeDesc(Pageable p);
 
     /**
      * 按观看次数由高到低排序壁纸
@@ -115,12 +116,14 @@ public interface WallpaperRepository extends PagingAndSortingRepository<Wallpape
      * @return 返回按观看次数由高到低排列的壁纸
      */
     @RestResource(path = "viewOrder", rel = "viewOrder")
-    List<Wallpaper> findByOrderByViewsDesc(Pageable p);
+    List<Wallpaper> findAllByOrderByViewsDesc(Pageable p);
     /**
      * 按收藏次数由高到低排序壁纸
      * @param p 分页
      * @return 返回按收藏次数由高到低排列的壁纸
      */
     @RestResource(path = "favoritesOrder", rel = "favoritesOrder")
-    List<Wallpaper> findByOrderByFavoritesDesc(Pageable p);
+    List<Wallpaper> findAllByOrderByFavoritesDesc(Pageable p);
+
+
 }

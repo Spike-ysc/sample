@@ -8,7 +8,7 @@ import org.springframework.cache.annotation.EnableCaching;
 /**
  * 项目介绍：Spring Boot基础版本，提供最基本功能，所有新需求在此版本上进行改动
  * 作者：ysc
- * 日期：2021.2.11 16PM
+ * 日期：2021.2.11 4 PM
  */
 @MapperScan("henu.yan.sample.mapper")   //用于指定mapper文件的路径
 @SpringBootApplication

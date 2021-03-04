@@ -50,6 +50,16 @@ public interface WallpaperRepository extends PagingAndSortingRepository<Wallpape
     Page<Wallpaper> findAllByPurityInAndCategoryInOrderByViewsDesc(List<String> purity, List<String>  category, Pageable p);
 
     /**
+     *  按壁纸纯度和壁纸种类获取壁纸，并按上传时间由高到低排序
+     * @param purity 壁纸纯度，可多个
+     * @param category 壁纸种类，可多个
+     * @param p 分页
+     * @return 返回该壁纸纯度和壁纸种类的壁纸
+     */
+    @RestResource(path = "type-time", rel = "type-time")
+    Page<Wallpaper> findAllByPurityInAndCategoryInOrderByUploadTimeDesc(List<String> purity, List<String> category, Pageable p);
+
+    /**
      * 获取用户上传的所有壁纸，并按浏览次数由高到低排序
      * @param uploader 用户ID
      * @param p 分页
@@ -84,6 +94,17 @@ public interface WallpaperRepository extends PagingAndSortingRepository<Wallpape
      */
     @RestResource(path = "tags", rel = "tags")
     List<Wallpaper> findAllByTagsContainingOrderByViewsDesc(String tags, Pageable p);
+
+    /**
+     * 模糊搜索符合tags的壁纸，并设置壁纸纯度和壁纸种类，并按浏览次数由高到低排序
+     * @param tags tags关键字
+     * @param purity 壁纸纯度，可多个
+     * @param category 壁纸种类，可多个
+     * @param p 分页
+     * @return 返回含有tags关键字并在规定的纯度和种类内的壁纸
+     */
+    @RestResource(path = "tags-search", rel = "tags-search")
+    Page<Wallpaper> findAllByTagsContainingAndPurityInAndCategoryInOrderByViewsDesc(String tags, List<String> purity, List<String>  category, Pageable p);
 
     /**
      * 获取不同颜色的壁纸，并按浏览次数由高到低排序

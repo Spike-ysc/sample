@@ -2,9 +2,10 @@ package henu.yan.sample.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 @Entity(name = "wallpaper")
-public class Wallpaper {
+public class Wallpaper implements Serializable {
     @Id
     private int id;
     private String imgKey;

@@ -29,4 +29,5 @@ public class MovieController {
         Movie movie2 = movieService.getMovieById(1);
         System.out.println("movie2:"+movie2.getName());
     }
+
 }
